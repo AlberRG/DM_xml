@@ -3,19 +3,19 @@ import csv
 from lxml import etree
 
 
-def crearCsv(name):
+def crear_csv(name):
     with open(name, 'w', newline='') as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         spamwriter.writerow(['ID', 'Name', 'Latitude', 'Longitude', 'Phone', 'Email', 'Address', 'Web', 'Categoria'])
 
 
-def escribirCsv(valores, name):
+def escribir_csv(valores, name):
     with open(name, 'a', newline='', encoding="utf-8") as csvfile:
         spamwriter = csv.writer(csvfile, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
         spamwriter.writerow(valores)
 
 
-def parsear_xml(xml_Name, csv_Name, category):
+def parsear_xml(xml_name, csv_name, category):
     latitude = ""
     longitude = ""
     phone = ""
@@ -24,8 +24,8 @@ def parsear_xml(xml_Name, csv_Name, category):
     name = ""
     web = ""
 
-    crearCsv(csv_Name)
-    doc = etree.parse(xml_Name)
+    crear_csv(csv_name)
+    doc = etree.parse(xml_name)
     raiz = doc.getroot()
     for i in raiz:
         iden = i.get("id")
@@ -46,14 +46,19 @@ def parsear_xml(xml_Name, csv_Name, category):
                 web = x.find("web").text
 
         valores = [iden, name, latitude, longitude, phone, email, address, web, category]
-        escribirCsv(valores, csv_Name)
+        escribir_csv(valores, csv_name)
 
 
 def leer_xml():
+    name = 'datos.csv'
     print("Trabajando Restaurantes")
-    parsear_xml('restaurantes_v1_es.xml', 'datos.csv', 'restaurantes')
+    parsear_xml('restaurantes_v1_es.xml', name, 'restaurantes')
     print("Trabajando Alojamientos")
-    parsear_xml('alojamientos_v1_es.xml', 'datos.csv', 'alojamientos')
+    parsear_xml('alojamientos_v1_es.xml', name, 'alojamientos')
+    print("Trabajando en Agenda")
+    parsear_xml('agenda_v1_es.xml', name, 'agenda')
+    print("Trabajando en turismo")
+    parsear_xml('turismo_v1_es.xml', name, 'turismo')
 
 
 if __name__ == '__main__':
