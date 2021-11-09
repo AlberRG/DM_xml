@@ -49,6 +49,17 @@ def parsear_xml(xml_name, csv_name, category):
         escribir_csv(valores, csv_name)
 
 
+def leer_csv():
+    with open('0-oficinas-turismo.csv') as csvfile:
+        reader = csv.reader(csvfile, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        cont = 0
+        for row in reader:
+            if cont != 0:
+                valores = [row[0], row[1], row[24], row[25], row[26], row[28], row[21], row[8], 'oficinas-turismo']
+                escribir_csv(valores, 'datos.csv')
+            cont += 1
+
+
 def leer_xml():
     name = 'datos.csv'
     print("Trabajando Restaurantes")
@@ -59,6 +70,7 @@ def leer_xml():
     parsear_xml('agenda_v1_es.xml', name, 'agenda')
     print("Trabajando en turismo")
     parsear_xml('turismo_v1_es.xml', name, 'turismo')
+    leer_csv()
 
 
 if __name__ == '__main__':
