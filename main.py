@@ -24,7 +24,6 @@ def parsear_xml(xml_name, csv_name, category):
     name = ""
     web = ""
 
-    crear_csv(csv_name)
     doc = etree.parse(xml_name)
     raiz = doc.getroot()
     for i in raiz:
@@ -62,6 +61,7 @@ def leer_csv():
 
 def leer_xml():
     name = 'datos.csv'
+    crear_csv(name)
     print("Trabajando Restaurantes")
     parsear_xml('restaurantes_v1_es.xml', name, 'restaurantes')
     print("Trabajando Alojamientos")
