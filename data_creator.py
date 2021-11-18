@@ -37,7 +37,6 @@ def parsear_xml(xml_name, csv_name, category):
     doc = etree.parse(xml_name)
     raiz = doc.getroot()
     for i in raiz:
-        print('hola')
         iden = i.get("id")
         for x in i:
             if x.find("name") is not None:
