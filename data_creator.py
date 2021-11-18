@@ -37,6 +37,7 @@ def parsear_xml(xml_name, csv_name, category):
     doc = etree.parse(xml_name)
     raiz = doc.getroot()
     for i in raiz:
+        print('hola')
         iden = i.get("id")
         for x in i:
             if x.find("name") is not None:
@@ -53,11 +54,11 @@ def parsear_xml(xml_name, csv_name, category):
                 address = x.find("address").text
             if x.find("web") is not None:
                 web = x.find("web").text
-        #Obtener 5 tuits para cada nombre
-        for tweet in tweepy.Cursor(api.search_tweets, q=name, lang='es').items(5):
-            fila = [id, name, tweet.text]
-            tuits_csv.append(fila)
-
+        #Obtener 3 tuits para cada nombre de restaurantes
+        if category == 'Restaurantes':
+            for tweet in tweepy.Cursor(api.search_tweets, q=name, lang='es').items(3):
+                fila = [id, name, tweet.text]
+                tuits_csv.append(fila)
         valores = [iden, name, latitude, longitude, phone, email, address, web, category]
         escribir_csv(valores, csv_name)
     #Guardar lista en CSV
