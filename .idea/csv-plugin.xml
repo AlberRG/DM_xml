@@ -10,6 +10,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\206577-0-oficinas-turismo.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=";" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\alojamientos.csv">
           <value>
             <Attribute>
